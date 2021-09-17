@@ -4,3 +4,4 @@ build
 make
 bin
 .gitignore
+.code-workspace
