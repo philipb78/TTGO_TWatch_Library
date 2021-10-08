@@ -702,7 +702,7 @@ public:
             return false;
         }
         lv_init();
-        lv_indev_drv_t indev_drv;
+        static lv_indev_drv_t indev_drv;
         lv_disp_drv_init(&disp_drv);
         static lv_disp_draw_buf_t disp_buf;
 
