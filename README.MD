@@ -12,17 +12,28 @@
 - Example [description](docs/examples_en.md)
 - The latest factory firmware is made by [sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch)
 
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen1.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen2.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen3.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen4.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen5.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen6.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen7.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen8.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen9.png)
-![screenshot](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen10.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen1.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen2.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen3.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen4.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen5.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen6.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen7.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen8.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen9.png)
+![sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch/blob/master/images/screen10.png)
 
+- Demonstration effect of T-Watch2020-V3 from lunokjod
+
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/watchface0.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/day_watchface0.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/playground0.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/playground3.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/settime.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/battery.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/ble_upload.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/mainmenu_provisioning.png)
+![lunokjod/watch](https://github.com/lunokjod/watch/blob/devel/doc/provisioning.png)
 
 
 <h2 align = "left">🚀 Characteristics</h2>
@@ -51,6 +62,15 @@
     + [Instructions for Debian/Ubuntu Linux](docs/arduino-ide/debian_ubuntu.md)
     + [Instructions for Fedora](docs/arduino-ide/fedora.md)
     + [Instructions for openSUSE](docs/arduino-ide/opensuse.md)
+
+
+<h2 align = "left">🔷 FAQ</h2>
+
+- The following code is reported as an error when uploading. Please change the default upload baud rate in ArduinoIDE from '20000' to '921600'.
+  ```
+  A fatal error occurred: Failed to write to target RAM(result was 01070000)
+  ```
+- This error may also occur on MacOS if using a poorly compatible USB to serial driver.  The driver at [wch.cn](https://www.wch.cn/downloads/CH34XSER_MAC_ZIP.html) is a better match.  The webpage is in Chinese but the driver is digitally signed for security.
 
 <h2 align = "left">🔶 How to find the sample program</h2>
 
@@ -336,6 +356,7 @@
 
  <h2 align = "left">🔶 More interesting projects</h2>
 
+- [lunokjod/watch](https://github.com/lunokjod/watch)
 - [Micropython-twatch2020](https://y0no.fr/posts/micropython-ttgo-twatch2020/)
 - [sharandac/My-TTGO-Watch](https://github.com/sharandac/My-TTGO-Watch)
 - [lyusupov/Flight Recorder](https://github.com/lyusupov/SoftRF/wiki/Flight-Recorder)

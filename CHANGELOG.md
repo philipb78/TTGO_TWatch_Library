@@ -1,4 +1,40 @@
 # Changelog
+## (11.9.22)
+- <examples/TFT_eSPI/IOTA_Price> Update library description and usage examples
+
+
+## (8.30.22)
+- <examples/Shield/S7XG/S7xG_LoRa> Added SDCard test
+
+
+## (8.19.2022)
+- Update wifi event macro name <examples/LVGL/SimpleWatch>
+
+
+## (7.27.2022)
+- Add T-Block Epaper DEPG0150BN driver
+
+## (06.4.2022)
+- Fixed increasing the I2C rate causing the backlight to turn on abnormally, only increasing the rate when initializing the sensor
+
+## (05.27.2022)
+- Reduce the PWM frequency to 1000HZ
+
+
+## (05.14.2022)
+- Update GxEPD to GxEPD2 , Update e-paper example to fit new screen
+- Remove <examples/Sensor/VEMl6075> I2C scan
+
+
+
+## (05.10.2022)
+- Come back again . Fix BMA423_Direction rotate in wrong direction in V1/V2
+- Optimize BMA423 startup time
+  * Before optimization: Start  using 2151 millis
+  * After optimization :
+  * Cold Start: Start  using 987 millis
+  * Sleep Wake: Start  using 603 millis
+
 
 ## (10.13.2020)
 - Change 2020V1, 2020V2 LVGL touch I2C polling to interrupt polling, others are not currently adapted
@@ -40,7 +76,7 @@
 - Update example description
 - Added MAX30208 Temperature example <examples/Sensor/MAX30208>
 - Added `GC9A01A` display driver , Suitable for T-Block round 240x240 screen
-- Added DW1000 examples <examples/Shield/DW1000_BasicSender>,<examples/Shield/DW1000Ranging_ANCHOR>,<examples/Shield/DW1000Ranging_TAG>,<examples/Shield/DW1000_BasicReceiver>,<examples/Shield/DW1000_RangingAnchor>,<examples/Shield/DW1000_RangingTag> 
+- Added DW1000 examples <examples/Shield/DW1000_BasicSender>,<examples/Shield/DW1000Ranging_ANCHOR>,<examples/Shield/DW1000Ranging_TAG>,<examples/Shield/DW1000_BasicReceiver>,<examples/Shield/DW1000_RangingAnchor>,<examples/Shield/DW1000_RangingTag>
 
 ## (1.12.2020)
 - Added UnitTest directory, Store hardware test code
@@ -80,13 +116,13 @@
 
 ## (28/1/2021)
 - Add touch three mode test example <BasicUnit/TouchpanelMode>
-- Delete Air530 example 
-- Add basic Twatch 2020 V2 GPS example 
-- Update TWATCH 2020 V2 pin definition 
-- Update pin definition document 
+- Delete Air530 example
+- Add basic Twatch 2020 V2 GPS example
+- Update TWATCH 2020 V2 pin definition
+- Update pin definition document
 
 ## (23/2/2021)
-- <BasicUnit/AXP20x_ADC> example compatible with T-Block 
+- <BasicUnit/AXP20x_ADC> example compatible with T-Block
 
 ## (27/3/2021)
 - [Merged#119](https://github.com/Xinyuan-LilyGO/TTGO_TWatch_Library/pull/119)
@@ -94,7 +130,7 @@
 - Added <examples/Shield/S7xG_Debug> examples
 
 ## (4/1/2021)
-- Update TWATCH-N touch to IO33 
+- Update TWATCH-N touch to IO33
 - Added <examples/UnitTest/HardwareTest> examples
 
 

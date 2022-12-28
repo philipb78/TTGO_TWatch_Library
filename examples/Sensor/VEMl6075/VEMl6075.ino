@@ -16,6 +16,7 @@ TTGOClass *ttgo;
 TFT_eSPI *tft ;
 VEML6075 uv;
 
+
 void setup(void)
 {
     Serial.begin(115200);
@@ -24,6 +25,12 @@ void setup(void)
     tft = ttgo->tft;
     tft->fillScreen(TFT_BLACK);
     ttgo->openBL();
+
+    //TODO:twatch 2019 touch panel occupies Wire1, it needs to be closed first,need repair !!!
+#ifdef LILYGO_WATCH_2019_WITH_TOUCH
+    Wire1.end();
+#endif
+
     Wire1.begin(25, 26);
     if (uv.begin(Wire1) == false) {
         Serial.println("Unable to communicate with VEML6075.");
@@ -36,7 +43,7 @@ void setup(void)
 
 void loop(void)
 {
-    tft->fillRect(30, 90, 120, 80, TFT_BLACK);
+    tft->fillRect(30, 90, 200, 80, TFT_BLACK);
     tft->setCursor(30, 90);
     tft->println("UVA:" + String(uv.uva()));
     tft->setCursor(30, tft->getCursorY());

@@ -15,6 +15,10 @@ Written by Lewis he //https://github.com/lewisxhe
 
 #include <SPI.h>
 
+#if defined(LILYGO_WATCH_HAS_S76_S78G)
+#define LILYGO_WATCH_HAS_SDCARD
+#endif
+
 #ifdef LILYGO_WATCH_LVGL
 #include <Ticker.h>
 #endif
@@ -51,7 +55,7 @@ typedef FocalTech_Class CapacitiveTouch ;
 #endif
 
 #ifdef LILYGO_WATCH_HAS_NFC
-#include "drive/nfc/Adafruit_PN532.h"
+#include "libraries/Adafruit-PN532/Adafruit_PN532.h"
 #endif
 
 #ifdef LILYGO_WATCH_HAS_BUTTON
@@ -111,6 +115,11 @@ typedef FocalTech_Class CapacitiveTouch ;
 #include "libraries/GxEPD/src/GxIO/GxIO.h"
 #include "libraries/GxEPD/src/GxIO/GxIO_SPI/GxIO_SPI.h"
 #include "libraries/GxEPD/src/GxGDEP015OC1/GxGDEP015OC1.h"
+#elif defined(LILYGO_EINK_DEPG0150BN)
+#include "libraries/GxEPD/src/GxEPD.h"
+#include "libraries/GxEPD/src/GxIO/GxIO.h"
+#include "libraries/GxEPD/src/GxIO/GxIO_SPI/GxIO_SPI.h"
+#include "libraries/GxEPD/src/GxDEPG0150BN/GxDEPG0150BN.h"
 #elif  defined(LILYGO_EINK_GDEH0154D67_TP) || defined(LILYGO_EINK_GDEH0154D67_BL)
 #include "libraries/GxEPD/src/GxEPD.h"
 #include "libraries/GxEPD/src/GxIO/GxIO.h"
@@ -139,13 +148,34 @@ typedef FocalTech_Class CapacitiveTouch ;
 
 #define TOUCH_IRQ_BIT           (_BV(1))
 
-	/* Selectively disable some initialisation */
-#define NO_HARDWARE		(_BV(0))
-#define NO_POWER		(_BV(1))
-#define NO_TFT			(_BV(2))
-#define NO_TOUCH		(_BV(3))
-#define NO_SENSOR		(_BV(4))
-#define NO_BACKLIGHT	(_BV(5))
+/* Selectively disable some initialisation */
+#define NO_HARDWARE     (_BV(0))
+#define NO_POWER        (_BV(1))
+#define NO_TFT          (_BV(2))
+#define NO_TOUCH        (_BV(3))
+#define NO_SENSOR       (_BV(4))
+#define NO_BACKLIGHT    (_BV(5))
+
+
+
+#if defined(LILYGO_WATCH_2020_V1) || defined(LILYGO_WATCH_2019_WITH_TOUCH) || defined(LILYGO_WATCH_2019_NO_TOUCH)
+#define WATCH_SCREEN_TOP_EDGE           0
+#define WATCH_SCREEN_LEFT_EDGE          1
+#define WATCH_SCREEN_BOTTOM_EDGE        2
+#define WATCH_SCREEN_RIGHT_EDGE         3
+#elif defined(LILYGO_WATCH_2020_V2)
+#define WATCH_SCREEN_TOP_EDGE           1
+#define WATCH_SCREEN_LEFT_EDGE          2
+#define WATCH_SCREEN_BOTTOM_EDGE        3
+#define WATCH_SCREEN_RIGHT_EDGE         0
+#elif defined(LILYGO_WATCH_2020_V3)
+#define WATCH_SCREEN_TOP_EDGE           3
+#define WATCH_SCREEN_LEFT_EDGE          0
+#define WATCH_SCREEN_BOTTOM_EDGE        1
+#define WATCH_SCREEN_RIGHT_EDGE         2
+#endif
+
+
 
 class TTGOClass
 {
@@ -199,23 +229,23 @@ public:
         drv = new Adafruit_DRV2605();
 #endif  /*LILYGO_WATCH_DRV2605*/
 
-		if(!(disable & NO_HARDWARE))
-	        initHardware();
-	
-		if(!(disable & NO_HARDWARE))
-        	initPower();
+        if (!(disable & NO_HARDWARE))
+            initHardware();
 
-		if(!(disable & NO_HARDWARE))
-	        initTFT();
+        if (!(disable & NO_HARDWARE))
+            initPower();
 
-		if(!(disable & NO_HARDWARE))
-    	    initTouch();
+        if (!(disable & NO_HARDWARE))
+            initTFT();
 
-		if(!(disable & NO_HARDWARE))
-	        initSensor();
+        if (!(disable & NO_HARDWARE))
+            initTouch();
 
-		if(!(disable & NO_HARDWARE))
-    	    initBlacklight();
+        if (!(disable & NO_HARDWARE))
+            initSensor();
+
+        if (!(disable & NO_HARDWARE))
+            initBlacklight();
     }
 
 #ifdef LILYGO_WATCH_HAS_BMA423
@@ -446,6 +476,31 @@ public:
 
 
 #endif  /*LILYGO_WATCH_HAS_TOUCH*/
+
+
+
+    /******************************************
+     *              Wire1
+     * ***************************************/
+
+
+#if defined(LILYGO_WATCH_2019_WITH_TOUCH) ||  defined(LILYGO_WATCH_2019_NO_TOUCH)  || defined(LILYGO_WATCH_BLOCK)
+
+    I2CBus *wire;
+
+    //Use the second set of I2C interfaces
+    void beginWire(uint8_t sda = 25, uint8_t scl = 26)
+    {
+        wire = new I2CBus(Wire1, sda, scl);
+    }
+
+    TwoWire &getWire()
+    {
+        return (*wire->getHandler());
+    }
+
+#endif  /*TWI1*/
+
 
     /******************************************
      *              Power
@@ -839,7 +894,7 @@ public:
     ePaperDisplay *ePaper = nullptr;
 #endif
 
-#if defined(LILYGO_EINK_GDEH0154D67_TP) || defined(LILYGO_EINK_GDEH0154D67_BL) || defined(LILYGO_EINK_GDEP015OC1)
+#if defined(LILYGO_EINK_GDEH0154D67_TP) || defined(LILYGO_EINK_GDEH0154D67_BL) || defined(LILYGO_EINK_GDEP015OC1) || defined(LILYGO_EINK_DEPG0150BN)
     GxIO_Class  *io = nullptr;
     GxEPD_Class *ePaper = nullptr;
 #endif
@@ -879,6 +934,8 @@ public:
     }
 #endif
 
+
+
 #ifdef LILYGO_WATCH_HAS_SDCARD
     SPIClass *sdhander = nullptr;
 
@@ -886,6 +943,7 @@ public:
     {
         if (!sdhander) {
             sdhander = new SPIClass(HSPI);
+            pinMode(SD_MISO, INPUT_PULLUP);
             sdhander->begin(SD_SCLK, SD_MISO, SD_MOSI, SD_CS);
         }
         if (!SD.begin(SD_CS, *sdhander)) {
@@ -1135,6 +1193,13 @@ private:
     {
 #if defined(LILYGO_WATCH_HAS_BMA423)
         struct bma423_axes_remap remap_data;
+
+#ifndef LILYGO_WATCH_HAS_NFC
+        // The speed cannot be adjusted to 400K using the NFC module,
+        // the speed needs to be adjusted to the default
+        i2c->setClock(400000);
+#endif
+
         if (!bma->begin()) {
             log_e("Begin BMA423 FAIL");
             return false;
@@ -1252,7 +1317,7 @@ private:
         /* sclk = 18 mosi = 23 miso = n/a */
         SPI.begin(EINK_SPI_CLK, EINK_SPI_MISO, EINK_SPI_MOSI);
         ePaper = new ePaperDisplay( GDEW0371W7, EINK_BUSY, EINK_RESET, EINK_DC, EINK_SS );
-#elif defined(LILYGO_EINK_GDEH0154D67_BL) || defined(LILYGO_EINK_GDEH0154D67_TP) || defined(LILYGO_EINK_GDEP015OC1)
+#elif defined(LILYGO_EINK_GDEH0154D67_BL) || defined(LILYGO_EINK_GDEH0154D67_TP) || defined(LILYGO_EINK_GDEP015OC1) || defined(LILYGO_EINK_DEPG0150BN)
         log_i("GDEH0154D67 Init...");
 
         /* sclk = 18 mosi = 23 miso = n/a */
